@@ -9,5 +9,6 @@ LOCAL_C_INCLUDES += external/sqlite/dist
 LOCAL_SHARED_LIBRARIES := liblog libsqlite libandroid_runtime
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
+LOCAL_MODULE_TAGS := debug,eng
 
 include $(BUILD_EXECUTABLE)
