@@ -387,7 +387,7 @@ int main(int argc, char *argv[])
     dballow = database_check(db, &su_from, &su_to);
     int notifications = check_notifications(db);
     // Close the database, we're done with it. If it stays open,
-    // it can cause problems on certain systems
+    // it will cause problems
     if (db) sqlite3_close(db);
 
     switch (dballow) {
