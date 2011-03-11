@@ -43,7 +43,7 @@
 
 #include "su.h"
 
-extern char* _mktemp(char*); /* mktemp doesn't link right.  Don't ask me why. */
+//extern char* _mktemp(char*); /* mktemp doesn't link right.  Don't ask me why. */
 
 extern sqlite3 *database_init();
 extern int database_check(sqlite3*, struct su_initiator*, struct su_request*);
@@ -162,7 +162,7 @@ static int socket_create_temp(unsigned req_uid)
         memset(&sun, 0, sizeof(sun));
         sun.sun_family = AF_LOCAL;
         strcpy(buf, SOCKET_PATH_TEMPLATE);
-        socket_path = _mktemp(buf);
+        socket_path = mktemp(buf);
         snprintf(sun.sun_path, sizeof(sun.sun_path), "%s", socket_path);
 
         if (bind(fd, (struct sockaddr*)&sun, sizeof(sun)) < 0) {
@@ -387,7 +387,7 @@ int main(int argc, char *argv[])
     dballow = database_check(db, &su_from, &su_to);
     int notifications = check_notifications(db);
     // Close the database, we're done with it. If it stays open,
-    // it can cause problems on certain systems
+    // it will cause problems
     if (db) sqlite3_close(db);
 
     switch (dballow) {
